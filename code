@@ -1,0 +1,10 @@
+#!/opt/homebrew/bin/bash
+
+interpreter="$1" # Depends on the language: shellcheck for shell script; go for golang; python3 for python
+
+file="$2"
+path="$(pwd)/$file"
+
+# entr bash -c "clear; shellcheck $path" <<< "$path"
+entr bash -c "clear; $interpreter $path" <<< "$path"
+
