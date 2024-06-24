@@ -1,7 +1,7 @@
 # Run your code while editing on a terminal
 
 * This script was designed for anyone who uses a terminal editor, like *vim*.
-* Your code will run automatically, while still you have another window for editing it.
+* Your code will run automatically after savings, while still you have another window for editing it.
 * The regular shell it runs, if none is provided, is `bash`.
 * It has compatibility with `shellcheck`.
 
