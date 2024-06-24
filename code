@@ -1,10 +1,25 @@
-#!/opt/homebrew/bin/bash
+#!/bin/sh
 
-interpreter="$1" # Depends on the language: shellcheck for shell script; go for golang; python3 for python
+file="$1"
+path=$PWD
+shell=""
 
-file="$2"
-path="$(pwd)/$file"
+code () {
+# Detecting if user wants to run shellcheck.
+        if [ "$3" = "shellcheck" ]; then
+                find "$file" | entr -c "$shell" -c "date; shellcheck $path/$file"
+        else
+                find "$file" | entr -c "$shell" -c "date; $shell $path/$file"
+        fi
+}
 
-# entr bash -c "clear; shellcheck $path" <<< "$path"
-entr bash -c "clear; $interpreter $path" <<< "$path"
 
+if [ -n "$2" ]; then
+# Checking whether there is a shell specified by user.
+        shell="$2"
+# Using bash as the shell, if no shell is provided by user.
+else
+        shell="bash"
+fi
+
+code "$1" "$2" "$3"
