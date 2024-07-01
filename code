@@ -1,13 +1,15 @@
 #!/bin/sh
 
 file="$1"
-path=$PWD
+path="$PWD/$file"
 shell=""
 
 code () {
 # Detecting if user wants to run shellcheck.
         if [ "$3" = "shellcheck" ]; then
                 find "$file" | entr -c "$shell" -c "date; shellcheck $path/$file"
+	elif [ "$2" = "python3" ]; then
+		find "$path" | entr -c bash -c "date; python3 $path"
         else
                 find "$file" | entr -c "$shell" -c "date; $shell $path/$file"
         fi
