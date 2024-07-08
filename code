@@ -10,6 +10,8 @@ code () {
                 find "$file" | entr -c "$shell" -c "date; shellcheck $path/$file"
 	elif [ "$2" = "python3" ]; then
 		find "$path" | entr -c bash -c "date; python3 $path"
+	elif [ "$2" = "go" ]; then
+		find "$path" | entr -c bash -c "date; go run ."
         else
                 find "$file" | entr -c "$shell" -c "date; $shell $path/$file"
         fi
