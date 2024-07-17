@@ -1,6 +1,7 @@
 #!/bin/sh
 
 file="$1"
+file_no_extension="${file%???}"
 path="$PWD/$file"
 shell=""
 
@@ -12,6 +13,8 @@ code () {
 		find "$path" | entr -rc bash -c "date; python3 $path"
 	elif [ "$2" = "go" ]; then
 		find "$path" | entr -rc bash -c "date; go run ."
+	elif [ "$2" = "typescript" ]; then
+		find "$path" | entr -rc bash -c "date; tsc $path && node $file_no_extension.js"
         else
                 find "$file" | entr -rc "$shell" -c "date; $shell $path/$file"
         fi
